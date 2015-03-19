@@ -1,0 +1,34 @@
+---
+- name: Download EPEL repo.
+  get_url: url=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm dest=/tmp/
+
+- name: Install EPEL repo.
+  command: rpm -Uvh --force /tmp/epel-release-6-8.noarch.rpm creates=/etc/yum.repos.d/epel.repo
+
+- name: Download Remi repo.
+  get_url: url=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm dest=/tmp/
+
+- name: Install Remi repo.
+  command: rpm -Uvh --force /tmp/remi-release-6.rpm creates=/etc/yum.repos.d/remi.repo
+
+- name: be sure common package is installed
+  yum: name={{ item }} state=installed
+  with_items:
+    - yum-fastestmirror
+    - gcc
+    - make
+    - pcre 
+    - pcre-devel
+    - rpm-build
+    - wget
+    - unzip
+    - ftp
+    - curl
+    - git
+    - tar
+    - which
+    - crontabs
+    - gzip
+    - glibc-common
+    - ImageMagick
+

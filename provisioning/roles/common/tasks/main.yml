@@ -1,0 +1,17 @@
+---
+- name: Ensure root default shell is bash
+  shell: cat /etc/passwd | grep ^root | grep bash$; echo $?
+  register: is_set_bash
+
+- name: Ensure root default shell is bash
+  shell: chsh -s /bin/bash
+  when: is_set_bash.stdout == "1"
+
+- name: Ensure set timezone JST
+  shell: rm -f /etc/localtime && cp -p /usr/share/zoneinfo/Japan /etc/localtime
+
+- name: Ensure exist home .ssh directory
+  file: path=~/.ssh state=directory
+
+- include: yum.yml
+- include: sshd.yml
