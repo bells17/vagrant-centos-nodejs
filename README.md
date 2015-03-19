@@ -3,8 +3,9 @@ vagrant-centos-nodejs
 
 ## Usage:
 
+- Install vagrant
+
 ```
-brew install vagrant
 brew install ansible
 vagrant up
 ```
