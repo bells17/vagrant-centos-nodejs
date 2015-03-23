@@ -31,4 +31,5 @@
     - gzip
     - glibc-common
     - ImageMagick
-
+    - vim
+    - tig
