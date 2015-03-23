@@ -10,6 +10,9 @@
 - name: Ensure set timezone JST
   shell: rm -f /etc/localtime && cp -p /usr/share/zoneinfo/Japan /etc/localtime
 
+- name: Ensure set LC_ALL
+  lineinfile: dest='~/.bashrc' regexp="^export LC_ALL=C" line="export LC_ALL=C"
+
 - name: Ensure exist home .ssh directory
   file: path=~/.ssh state=directory
 

@@ -6,3 +6,6 @@
   yum: name={{ item }} state=installed
   with_items:
     - mongodb-org
+
+- name: Ensure start mongod
+  service: name=mongod enabled=yes state=restarted

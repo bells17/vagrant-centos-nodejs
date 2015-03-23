@@ -1,0 +1,8 @@
+---
+- name: Ensure install redis
+  yum: 'name={{ item }} state=installed enablerepo=remi'
+  with_items:
+    - redis
+
+- name: Ensure start redis
+  service: name=redis enabled=yes state=restarted

@@ -19,7 +19,4 @@
   when: is_nodejs_installed.stdout != '0'
 
 - name: Add load nvm
-  lineinfile:
-    dest=~/.bashrc
-    regexp="^source ~/.nvm/nvm.sh"
-    line="source ~/.nvm/nvm.sh"
+  lineinfile: dest='~/.bashrc' regexp="^source ~/.nvm/nvm.sh" line="source ~/.nvm/nvm.sh"
