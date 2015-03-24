@@ -11,7 +11,7 @@
 - name: Install Remi repo.
   command: rpm -Uvh --force /tmp/remi-release-6.rpm creates=/etc/yum.repos.d/remi.repo
 
-- name: be sure common package is installed
+- name: Ensure install common package
   yum: name={{ item }} state=installed
   with_items:
     - yum-fastestmirror
@@ -33,3 +33,14 @@
     - ImageMagick
     - vim
     - tig
+    - gcc-c++
+    - flex
+    - bison
+    - gperf
+    - openssl-devel
+    - freetype-devel
+    - fontconfig-devel
+    - libicu-devel
+    - sqlite-devel
+    - libpng-devel
+    - libjpeg-devel
