@@ -12,15 +12,15 @@
   copy: src=:etc:profile.d/rbenv.sh dest=/etc/profile.d/rbenv.sh
 
 - name: Is set default ruby version
-  shell: "source /etc/profile.d/rbenv.sh && ruby -v | awk -F ' ' '{print $2}' | grep {{ default_ruby_version }} | echo $?"
+  shell: "source /etc/profile.d/rbenv.sh && ruby -v"
   register: is_set_default_ruby_version
 
 - name: Install default ruby version
   shell: "rbenv install {{ default_ruby_version }}"
   sudo_user: "{{ ansible_ssh_user }}"
-  when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stdout != '0'
+  when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stderr != ''
 
 - name: Set global default ruby version
   shell: "rbenv global {{ default_ruby_version }}"
   sudo_user: "{{ ansible_ssh_user }}"
-  when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stdout != '0'
+  when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stderr != ''
