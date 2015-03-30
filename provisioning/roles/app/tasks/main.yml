@@ -1,0 +1,15 @@
+---
+- name: Ensure install node-dev
+  shell: source ~/.nvm/nvm.sh && npm install node-dev@2.1.6 -g
+
+- name: Ensure install grunt-cli
+  shell: source ~/.nvm/nvm.sh && npm install grunt-cli -g
+
+- name: Ensure install coffee-script
+  shell: source ~/.nvm/nvm.sh && npm install -g coffee-script@1.6.3
+
+- name: Set mongodb conf
+  copy: src=:etc:mongod.conf dest=/etc/mongod.conf
+
+- name: Ensure start mongod
+  service: name=mongod enabled=yes state=restarted
