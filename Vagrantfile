@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = 'vvvv'
     ansible.playbook = "provisioning/site.yml"
-    ansible.inventory_path = "provisioning/ansible_hosts"
+    ansible.inventory_path = "provisioning/local"
     ansible.limit = 'local'
   end
 end
