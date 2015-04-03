@@ -1,9 +1,14 @@
 ---
+- name: Get nvm node default version
+  shell: cat ~/.nvm/alias/default
+  register: nvm_node_version
+
 - name: Ensure install node-dev
-  shell: source ~/.nvm/nvm.sh && npm install node-dev@2.1.6 -g
+  npm: name=node-dev version=2.1.6 global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
 
 - name: Ensure install grunt-cli
-  shell: source ~/.nvm/nvm.sh && npm install grunt-cli -g
+  npm: name=grunt-cli global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
 
 - name: Ensure install coffee-script
-  shell: source ~/.nvm/nvm.sh && npm install -g coffee-script@1.6.3
+  npm: name=coffee-script version=1.6.3 global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
+
