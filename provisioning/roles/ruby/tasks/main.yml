@@ -2,11 +2,15 @@
 - name: Get rbenv
   git: repo=https://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv update=no
 
+- name: Create rbenv plugin create
+  file: path=/usr/local/rbenv/plugins state=directory
+
 - name: Get ruby-build
-  git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build update=no
+  shell: git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+  ignore_errors: true
 
 - name: Set rbenv permission
-  file: path=/usr/local/rbenv mode=0777 recurse=yes state=directory
+  file: path=/usr/local/rbenv/ mode=0777 recurse=yes state=directory
 
 - name: Set rbenv env
   copy: src=:etc:profile.d/rbenv.sh dest=/etc/profile.d/rbenv.sh
@@ -14,13 +18,14 @@
 - name: Is set default ruby version
   shell: "source /etc/profile.d/rbenv.sh && ruby -v"
   register: is_set_default_ruby_version
+  ignore_errors: true
 
 - name: Install default ruby version
-  shell: "rbenv install {{ default_ruby_version }}"
+  shell: "source /etc/profile.d/rbenv.sh && rbenv install {{ default_ruby_version }}"
   sudo_user: "{{ ansible_ssh_user }}"
   when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stderr != ''
 
 - name: Set global default ruby version
-  shell: "rbenv global {{ default_ruby_version }}"
+  shell: "source /etc/profile.d/rbenv.sh && rbenv global {{ default_ruby_version }}"
   sudo_user: "{{ ansible_ssh_user }}"
   when: is_set_default_ruby_version is defined and is_set_default_ruby_version.stderr != ''

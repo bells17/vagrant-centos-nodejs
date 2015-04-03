@@ -44,3 +44,7 @@
     - sqlite-devel
     - libpng-devel
     - libjpeg-devel
+    - readline-devel
+    - libyaml-devel
+    - zlib-devel
+    - libffi-devel
