@@ -1,5 +1,24 @@
 ---
+# - name: Ensure install rbenv
+#   git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
+
+- name: Add rbenv path
+  lineinfile: dest='~/.bashrc' line="export PATH=$HOME/.rbenv/bin:$PATH"
+
+- name: Add rbenv init
+  lineinfile: dest='~/.bashrc' line='eval "$(rbenv init -)"'
+
+- name: Ensure install ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+
+- name: Get global ruby version
+  shell: source ~/.bashrc && rbenv global
+  register: global_ruby_version
+
 - name: Ensure install ruby
-  yum: 'name={{ item }} state=installed'
-  with_items:
-    - ruby
+  shell: source ~/.bashrc && rbenv install {{ ruby_version }}
+  when: "global_ruby_version is defined and global_ruby_version.stdout != '{{ ruby_version }}'"
+
+- name: Ensure set default ruby version
+  shell: source ~/.bashrc && rbenv global {{ ruby_version }}
+  when: "global_ruby_version is defined and global_ruby_version.stdout != '{{ ruby_version }}'"
