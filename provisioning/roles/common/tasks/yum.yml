@@ -44,4 +44,3 @@
     - sqlite-devel
     - libpng-devel
     - libjpeg-devel
-    - build-essential

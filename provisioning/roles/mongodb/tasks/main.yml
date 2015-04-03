@@ -9,3 +9,6 @@
 
 - name: Ensure start mongod
   service: name=mongod enabled=yes state=restarted
+
+- name: Set mongodb config
+  copy: src=:etc/mongod.conf dest=/etc/mongod.conf
