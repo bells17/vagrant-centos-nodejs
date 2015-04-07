@@ -1,4 +1,6 @@
 ---
+# http://qiita.com/tsumekoara/items/b683bcc3564fcef8d3af
+# http://www.ehaco.net/2014/09/%E3%80%90CentOS%206.5%E3%80%91CentOS%E3%81%ABwkhtmltopdf%28%E6%97%A7wkpdf%29%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%80%90wkhtmltopdf%E3%80%91
 - name: Is phantomjs insatlled
   shell: which wkhtmltopdf > /dev/null && wkhtmltopdf -V | echo $?
   register: is_wkhtmltopdf_insatlled
