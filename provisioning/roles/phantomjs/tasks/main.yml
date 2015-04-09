@@ -9,9 +9,9 @@
   when: is_phantomjs_insatlled is defined and is_phantomjs_insatlled.stdout != '0'
 
 - name: tar phantomjs
-  shell: tar jxfv /tmp/phantomjs-1.9.0-linux-x86_64.tar.bz2
+  shell: tar jxfv /tmp/phantomjs-1.9.0-linux-x86_64.tar.bz2 -C /tmp
   when: is_phantomjs_insatlled is defined and is_phantomjs_insatlled.stdout != '0'
 
 - name: Copy phantomjs
-  shell: cp phantomjs-1.9.0-linux-x86_64/bin/phantomjs /usr/bin/
+  shell: cp /tmp/phantomjs-1.9.0-linux-x86_64/bin/phantomjs /usr/bin/
   when: is_phantomjs_insatlled is defined and is_phantomjs_insatlled.stdout != '0'
