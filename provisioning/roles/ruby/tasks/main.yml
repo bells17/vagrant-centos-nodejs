@@ -1,6 +1,6 @@
 ---
-# - name: Ensure install rbenv
-#   git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
+- name: Ensure install rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
 
 - name: Add rbenv path
   lineinfile: dest='~/.bashrc' line="export PATH=$HOME/.rbenv/bin:$PATH"

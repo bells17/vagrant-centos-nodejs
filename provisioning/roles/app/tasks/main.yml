@@ -3,6 +3,12 @@
   shell: cat ~/.nvm/alias/default
   register: nvm_node_version
 
+- name: nginx location config file directory
+  file: path=~/.node-gyp state=directory mode=0777
+
+- name: Ensure install node-gyp
+  npm: name=node-gyp version=0.6.11 global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
+
 - name: Ensure install node-dev
   npm: name=node-dev version=2.1.6 global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
 
@@ -11,4 +17,3 @@
 
 - name: Ensure install coffee-script
   npm: name=coffee-script version=1.6.3 global=yes executable=~/.nvm/{{ nvm_node_version.stdout }}/bin/npm
-
