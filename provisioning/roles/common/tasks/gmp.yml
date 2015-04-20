@@ -3,7 +3,7 @@
   get_url: url=ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.5.tar.bz2 dest=/tmp/gmp-5.0.5.tar.bz2
 
 - name: tar gmp
-	shell: cd /tmp && tar -xjf gmp-5.0.4.tar.bz2
+  shell: cd /tmp && tar -xjf /tmp/gmp-5.0.5.tar.bz2
 
 - name: Ensure make install
-	shell: cd /tmp/gmp-5.0.4 && ./configure && make && make check && make install
+  shell: cd /tmp/gmp-5.0.5 && ./configure && make && make check && make install

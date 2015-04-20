@@ -6,7 +6,8 @@
     - nodejs
     - mongodb
     - redis
-    - ruby
+    - python
+    # - ruby
     - phantomjs
     - wkhtmltopdf
     - app

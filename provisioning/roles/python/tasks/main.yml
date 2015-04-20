@@ -12,7 +12,7 @@
   copy: src=:etc:profile.d/pyenv.sh dest=/etc/profile.d/pyenv.sh
 
 - name: Ensure install python version
-	shell: source /etc/profile.d/pyenv.sh && pyenv install 2.7.3
+  shell: source /etc/profile.d/pyenv.sh && pyenv install 2.7.3
 
 - name: Set global python version
-	shell: source /etc/profile.d/pyenv.sh && pyenv global 2.7.3
+  shell: source /etc/profile.d/pyenv.sh && pyenv global 2.7.3

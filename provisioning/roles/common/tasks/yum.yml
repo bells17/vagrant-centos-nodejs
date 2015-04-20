@@ -63,3 +63,4 @@
     - gmp
     - python-setuptools
     - gyp
+    - protobuf-devel
