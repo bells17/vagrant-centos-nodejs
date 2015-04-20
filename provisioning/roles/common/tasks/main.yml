@@ -17,4 +17,5 @@
   file: path=~/.ssh state=directory
 
 - include: yum.yml
+- include: gmp.yml
 - include: sshd.yml

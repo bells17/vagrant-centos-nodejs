@@ -30,7 +30,6 @@
     - crontabs
     - gzip
     - glibc-common
-    - ImageMagick
     - vim
     - tig
     - gcc-c++
@@ -48,3 +47,19 @@
     - libyaml-devel
     - zlib-devel
     - libffi-devel
+    - libstdc++
+    - libxml2-devel
+    - libxml++
+    - libxml++-devel
+    - libxml2-python
+    - libxml2-static
+    - protobuf-devel
+    - zlib
+    - libtiff
+    - libjpeg
+    - freetype
+    - xz
+    - ImageMagick
+    - gmp
+    - python-setuptools
+    - gyp

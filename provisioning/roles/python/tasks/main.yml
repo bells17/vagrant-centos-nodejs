@@ -8,5 +8,11 @@
 - name: set pyenv permission
   file: path=/usr/local/pyenv mode=0777 recurse=yes state=directory
 
-- name : set pyenv env
+- name: set pyenv env
   copy: src=:etc:profile.d/pyenv.sh dest=/etc/profile.d/pyenv.sh
+
+- name: Ensure install python version
+	shell: source /etc/profile.d/pyenv.sh && pyenv install 2.7.3
+
+- name: Set global python version
+	shell: source /etc/profile.d/pyenv.sh && pyenv global 2.7.3
