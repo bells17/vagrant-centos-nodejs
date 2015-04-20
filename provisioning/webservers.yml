@@ -3,11 +3,11 @@
   sudo: yes
   roles:
     - common
+    - ruby
     - nodejs
     - mongodb
     - redis
     - python
-    # - ruby
     - phantomjs
     - wkhtmltopdf
     - app

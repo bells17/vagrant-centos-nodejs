@@ -16,6 +16,10 @@
 - name: Ensure exist home .ssh directory
   file: path=~/.ssh state=directory
 
+- name: Add LD_LIBRARY_PATH
+  lineinfile: dest='~/.bashrc' line='export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"'
+
+
 - include: yum.yml
 - include: gmp.yml
 - include: sshd.yml
