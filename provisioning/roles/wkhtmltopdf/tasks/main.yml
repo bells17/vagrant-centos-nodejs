@@ -1,0 +1,52 @@
+---
+# http://qiita.com/tsumekoara/items/b683bcc3564fcef8d3af
+# http://www.ehaco.net/2014/09/%E3%80%90CentOS%206.5%E3%80%91CentOS%E3%81%ABwkhtmltopdf%28%E6%97%A7wkpdf%29%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%80%90wkhtmltopdf%E3%80%91
+- name: Is phantomjs insatlled
+  shell: which wkhtmltopdf > /dev/null && wkhtmltopdf -V | echo $?
+  register: is_wkhtmltopdf_insatlled
+  ignore_errors: true
+
+- name: Ensure install common package
+  yum: name={{ item }} state=installed
+  with_items:
+    - openssl
+    - libX11
+    - libXext
+    - libXext.so.6
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Install dependencies
+  shell: rpm -ivh --force {{ item }}
+  with_items:
+    - ftp://rpmfind.net/linux/centos/6.6/os/x86_64/Packages/ttmkfdir-3.0.9-32.1.el6.x86_64.rpm
+    - ftp://rpmfind.net/linux/centos/6.6/os/x86_64/Packages/xorg-x11-fonts-Type1-7.2-9.1.el6.noarch.rpm
+    - ftp://rpmfind.net/linux/centos/6.6/os/x86_64/Packages/xorg-x11-fonts-75dpi-7.2-9.1.el6.noarch.rpm
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Download wkhtmltopdf rpm
+  get_url: url=http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-centos6-amd64.rpm dest=/tmp/
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Install Remi repo.
+  command: rpm -Uvh --force /tmp/wkhtmltox-0.12.2.1_linux-centos6-amd64.rpm
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Link command
+  shell: ln -s /usr/local/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Download font
+  get_url: url=http://ipafont.ipa.go.jp/ipaexfont/IPAexfont00201.php dest=/tmp/IPAexfont00201.zip
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Decompression font
+  shell: unzip -o /tmp/IPAexfont00201.zip -d /tmp/
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Copy font
+  shell: cp -R /tmp/IPAexfont00201 /usr/share/fonts/
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
+
+- name: Clear font cache
+  shell: fc-cache -fv && fc-list
+  when: is_wkhtmltopdf_insatlled is defined and is_wkhtmltopdf_insatlled.stdout != '0'
